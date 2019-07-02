@@ -27,6 +27,7 @@
 </template>
 <script>
 import axios from 'axios'
+import '@/vendor/gt' // 引入极验 JavaScript SDK 文件， 通过 window.initGeetest 使用
 export default {
   name: 'AppLogin',
   data () {
