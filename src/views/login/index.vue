@@ -61,7 +61,21 @@ export default {
             // 验证ready之后才能调用verify方法显示验证码
             captchaObj.verify() // 弹出验证码内容框
           }).onSuccess(function () {
-            console.log(captchaObj.getValidate())
+            const {
+              geetest_challenge: challenge,
+              geetest_validate: validate,
+              geetest_seccode: seccode } = captchaObj.getValidate()
+            axios({
+              method: 'GET',
+              url: `http://ttapi.research.itcast.cn/mp/v1_0/sms/codes/${mobile}`,
+              params: {
+                challenge,
+                validate,
+                seccode
+              }
+            }).then(res => {
+              console.log(res.data)
+            })
           }).onError(function () {
           })
           // 在这里注册“发送验证码” 按钮的点击事件，然后验证用户是否用户是否输入手机号及手机格式是否正确
